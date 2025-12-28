@@ -1,0 +1,37 @@
+# Placeholder Images for Restaurant Website
+
+Replace these placeholder images with your actual restaurant photos:
+
+## Hero Image
+- Path: /hero.jpg
+- Recommended size: 1920x1080px
+- Should show your restaurant interior or signature dish
+
+## Logo
+- Path: /logo.png
+- Recommended size: 200x200px (square)
+- Transparent background preferred
+
+## Dish Images
+- Path: /dish1.jpg, /dish2.jpg, /dish3.jpg
+- Recommended size: 400x300px
+- High-quality photos of your signature dishes
+
+## Additional Images
+You can add more images in the /public/images/ folder:
+- Restaurant exterior
+- Interior ambiance
+- Chef at work
+- Happy customers
+- Special events
+
+## Image Optimization Tips
+- Use WebP format for better compression
+- Compress images to under 500KB each
+- Use descriptive alt text for SEO
+- Ensure mobile-friendly aspect ratios
+
+## Unsplash Placeholder Images (for development)
+The site currently falls back to Unsplash images if your images aren't available:
+- Hero: Restaurant interior
+- Dishes: Various food photography

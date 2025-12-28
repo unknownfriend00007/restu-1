@@ -1,0 +1,74 @@
+export const siteContent = {
+  restaurant: {
+    name: "Restaurant Name",
+    tagline: "Authentic Flavors, Memorable Experiences",
+    description: "Your restaurant description here...",
+    logo: "/logo.png"
+  },
+
+  contact: {
+    phone: "+91-XXXXXXXXXX",
+    whatsapp: "+91-XXXXXXXXXX",
+    email: "info@restaurant.com",
+    address: {
+      street: "123 Main Street",
+      city: "Narnaund",
+      state: "Haryana",
+      zip: "125039",
+      mapLink: "https://maps.google.com/?q=28.9470,76.1065",
+      embedUrl: "https://maps.google.com/maps?q=28.9470,76.1065&output=embed"
+    }
+  },
+
+  hours: [
+    { day: "Monday - Friday", time: "11:00 AM - 10:00 PM" },
+    { day: "Saturday - Sunday", time: "10:00 AM - 11:00 PM" }
+  ],
+
+  social: {
+    instagram: "https://instagram.com/restaurant",
+    facebook: "https://facebook.com/restaurant",
+    telegram: "https://t.me/restaurantchannel"
+  },
+
+  menu: {
+    telegramChannelUsername: "restaurantchannel",
+    downloadLink: "https://t.me/channel/123",
+    categories: ["All", "Breakfast", "Lunch", "Dinner", "Beverages"]
+  },
+
+  homepage: {
+    heroImage: "/hero.jpg",
+    aboutText: "Welcome to our restaurant, where culinary tradition meets modern innovation. Our journey began with a simple passion for bringing people together through exceptional food. Every dish tells a story, carefully crafted with the finest ingredients and years of expertise. We believe that great food is not just about taste, but about creating memories that last a lifetime. Our chefs blend traditional recipes with contemporary techniques to create dishes that are both familiar and exciting. Whether you're joining us for a casual lunch or a special celebration, we're committed to making every visit unforgettable.",
+    featuredDishes: [
+      { 
+        name: "Signature Butter Chicken", 
+        description: "Tender chicken in rich, creamy tomato sauce with aromatic spices", 
+        price: "₹299", 
+        image: "/dish1.jpg" 
+      },
+      { 
+        name: "Royal Biryani", 
+        description: "Fragrant basmati rice with marinated meat and exotic spices", 
+        price: "₹399", 
+        image: "/dish2.jpg" 
+      },
+      { 
+        name: "Fresh Garden Salad", 
+        description: "Crisp vegetables with house-made dressing and herbs", 
+        price: "₹249", 
+        image: "/dish3.jpg" 
+      }
+    ]
+  },
+
+  forms: {
+    contactFormAction: "https://formspree.io/f/YOUR_ID"
+  },
+
+  seo: {
+    title: "Restaurant Name - Authentic Flavors in Narnaund",
+    description: "Experience authentic flavors and memorable dining at Restaurant Name in Narnaund, Haryana. Fresh ingredients, traditional recipes, and warm hospitality.",
+    keywords: "restaurant, narnaund, haryana, authentic food, dining, biryani, butter chicken"
+  }
+};
