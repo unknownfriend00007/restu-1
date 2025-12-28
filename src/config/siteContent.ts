@@ -1,3 +1,16 @@
+const VITE_CONTACT_PHONE = import.meta.env.VITE_CONTACT_PHONE || "+91-XXXXXXXXXX";
+const VITE_CONTACT_WHATSAPP = import.meta.env.VITE_CONTACT_WHATSAPP || "+91-XXXXXXXXXX";
+const VITE_CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || "info@restaurant.com";
+const VITE_ADDRESS_STREET = import.meta.env.VITE_ADDRESS_STREET || "123 Main Street";
+const VITE_ADDRESS_CITY = import.meta.env.VITE_ADDRESS_CITY || "Narnaund";
+const VITE_ADDRESS_STATE = import.meta.env.VITE_ADDRESS_STATE || "Haryana";
+const VITE_ADDRESS_ZIP = import.meta.env.VITE_ADDRESS_ZIP || "125039";
+const VITE_MAP_LINK = import.meta.env.VITE_MAP_LINK || "https://maps.google.com/?q=28.9470,76.1065";
+const VITE_MAP_EMBED_URL = import.meta.env.VITE_MAP_EMBED_URL || "https://maps.google.com/maps?q=28.9470,76.1065&output=embed";
+const VITE_TELEGRAM_USERNAME = import.meta.env.VITE_TELEGRAM_USERNAME || "restaurantchannel";
+const VITE_MENU_DOWNLOAD_LINK = import.meta.env.VITE_MENU_DOWNLOAD_LINK || "https://t.me/channel/123";
+const VITE_CONTACT_FORM_ACTION = import.meta.env.VITE_CONTACT_FORM_ACTION || "https://formspree.io/f/YOUR_ID";
+
 export const siteContent = {
   restaurant: {
     name: "Restaurant Name",
@@ -7,16 +20,16 @@ export const siteContent = {
   },
 
   contact: {
-    phone: "+91-XXXXXXXXXX",
-    whatsapp: "+91-XXXXXXXXXX",
-    email: "info@restaurant.com",
+    phone: VITE_CONTACT_PHONE,
+    whatsapp: VITE_CONTACT_WHATSAPP,
+    email: VITE_CONTACT_EMAIL,
     address: {
-      street: "123 Main Street",
-      city: "Narnaund",
-      state: "Haryana",
-      zip: "125039",
-      mapLink: "https://maps.google.com/?q=28.9470,76.1065",
-      embedUrl: "https://maps.google.com/maps?q=28.9470,76.1065&output=embed"
+      street: VITE_ADDRESS_STREET,
+      city: VITE_ADDRESS_CITY,
+      state: VITE_ADDRESS_STATE,
+      zip: VITE_ADDRESS_ZIP,
+      mapLink: VITE_MAP_LINK,
+      embedUrl: VITE_MAP_EMBED_URL
     }
   },
 
@@ -32,8 +45,8 @@ export const siteContent = {
   },
 
   menu: {
-    telegramChannelUsername: "restaurantchannel",
-    downloadLink: "https://t.me/channel/123",
+    telegramChannelUsername: VITE_TELEGRAM_USERNAME,
+    downloadLink: VITE_MENU_DOWNLOAD_LINK,
     categories: ["All", "Breakfast", "Lunch", "Dinner", "Beverages"]
   },
 
@@ -63,7 +76,7 @@ export const siteContent = {
   },
 
   forms: {
-    contactFormAction: "https://formspree.io/f/YOUR_ID"
+    contactFormAction: VITE_CONTACT_FORM_ACTION
   },
 
   seo: {
