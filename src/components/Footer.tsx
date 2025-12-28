@@ -141,6 +141,16 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
+        {/* Made by RPS Link */}
+        <div className="mt-4 text-center">
+          <a
+            href="mailto:mail.rps.active@proton.me"
+            className="text-gray-400 text-sm hover:text-orange-500 transition-colors"
+          >
+            Made by: RPS
+          </a>
+        </div>
       </div>
     </footer>
   );
