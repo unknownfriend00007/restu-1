@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, MapPin, Clock, Star } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';
@@ -16,7 +15,7 @@ const Index = () => {
             alt="Restaurant Hero"
             className="w-full h-full object-cover"
             // Replace with actual hero image
-            onError={(e) => {
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
               e.currentTarget.src = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop';
             }}
           />
@@ -72,8 +71,8 @@ const Index = () => {
                     alt={dish.name}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     // Replace with actual dish images
-                    onError={(e) => {
-                      e.currentTarget.src = `https://images.unsplash.com/photo-${1546069901-ba9599a7e63c?w=400&h=300&fit=crop`;
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                      e.currentTarget.src = `https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop`;
                     }}
                   />
                 </div>

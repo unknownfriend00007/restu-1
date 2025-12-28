@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Download, Clock } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';
 import TelegramWidget from '@/components/TelegramWidget';

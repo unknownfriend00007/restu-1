@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { Phone, Mail, MapPin, MessageCircle, Clock, Facebook, Instagram, Send } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';
 import ContactForm from '@/components/ContactForm';

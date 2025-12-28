@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Send, Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';

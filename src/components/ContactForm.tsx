@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { siteContent } from '@/config/siteContent';
 import { showSuccess, showError } from '@/utils/toast';
 

@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { Phone, Navigation, Clock, Car } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';
 
