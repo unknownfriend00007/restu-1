@@ -6,7 +6,7 @@ createRoot(document.getElementById("root")!).render(<App />);
 
 // AI Bot Script
 const script1 = document.createElement('script');
-script1.src = "https://cdn.jsdelivr.net/gh/unknownfriend00007/beautiful-flowise-chat@main/dist/chat.js";
+script1.src = "https://cdn.jsdelivr.net/gh/unknownfriend00007/beautiful-flowise-chat@6a3a247/dist/chat.js";
 script1.async = true;
 document.head.appendChild(script1);
 
