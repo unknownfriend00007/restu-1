@@ -52,16 +52,27 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        // Custom cyberpunk colors
+        cyan: {
+          400: "#00f0ff",
+          500: "#00ccff",
+          600: "#00aaff",
         },
+        magenta: {
+          400: "#ff00ff",
+          500: "#cc00cc",
+          600: "#aa00aa",
+        },
+        purple: {
+          400: "#9d00ff",
+          500: "#8a00e5",
+          600: "#7700cc",
+        },
+        gray: {
+          800: "#1a1a2e",
+          900: "#11111b",
+          950: "#0a0a0f",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -89,6 +100,10 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },

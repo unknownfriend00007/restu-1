@@ -13,6 +13,8 @@ interface ImportMetaEnv {
   readonly VITE_TELEGRAM_USERNAME: string;
   readonly VITE_MENU_DOWNLOAD_LINK: string;
   readonly VITE_CONTACT_FORM_ACTION: string;
+  readonly VITE_TELEGRAM_BOT_TOKEN: string;
+  readonly VITE_TELEGRAM_CHAT_ID: string;
 }
 
 interface ImportMeta {
