@@ -1,94 +1,172 @@
 "use client";
 
 import { Link } from 'react-router-dom';
-import { ChevronDown, Gamepad2, UtensilsCrossed, Sparkles } from 'lucide-react';
+import { Phone, MapPin, Clock, Star } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-mysteria-navy">
-        {/* Decorative Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-mysteria-charcoal via-mysteria-navy to-mysteria-navy"></div>
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]"></div>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={siteContent.homepage.heroImage}
+            alt="Restaurant Hero"
+            className="w-full h-full object-cover"
+            // Replace with actual hero image
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              e.currentTarget.src = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop';
+            }}
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
         
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto flex flex-col items-center">
-          <h1 className="font-display text-7xl md:text-[120px] font-light text-mysteria-cream tracking-wider mb-2 animate-fade-in opacity-0">
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
             {siteContent.restaurant.name}
           </h1>
-          <p className="font-subheading text-lg md:text-2xl text-mysteria-gold uppercase tracking-[0.4em] mb-8 animate-fade-in opacity-0 animate-delay-100">
+          <p className="text-xl md:text-2xl mb-8 animate-fade-in-delay">
             {siteContent.restaurant.tagline}
           </p>
-          
-          <div className="w-16 h-[2px] bg-mysteria-gold mb-8 animate-fade-in opacity-0 animate-delay-200"></div>
-          
-          <p className="font-sans text-lg md:text-xl text-[#cbd5e0] font-light max-w-2xl mb-12 animate-fade-in opacity-0 animate-delay-300 leading-relaxed">
-            {siteContent.restaurant.fullTagline}
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 animate-fade-in opacity-0 animate-delay-300">
-            <Link to="/menu" className="gold-button">
-              Explore Menu
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
+            <Link 
+              to="/menu"
+              className="bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-700 transition-colors text-lg"
+            >
+              View Menu
             </Link>
-            <Link to="/location" className="outline-button">
-              Visit Us
+            <Link 
+              to="/contact"
+              className="bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg"
+            >
+              Make Reservation
             </Link>
           </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-mysteria-gold animate-bounce">
-          <ChevronDown size={32} />
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-32 bg-mysteria-cream">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-20">
-            <h2 className="text-5xl font-display text-mysteria-navy mb-4">The MYSTERIA Experience</h2>
-            <p className="text-mysteria-textMuted uppercase tracking-widest text-sm">Excellence in every detail</p>
+      {/* About Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-8 text-gray-900">Our Story</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              {siteContent.homepage.aboutText}
+            </p>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              { 
-                icon: Gamepad2, 
-                title: "Premium Gaming", 
-                desc: "Equipped with the latest next-gen consoles and high-performance PC rigs for an unparalleled gaming session." 
-              },
-              { 
-                icon: UtensilsCrossed, 
-                title: "Gourmet Dining", 
-                desc: "A menu meticulously crafted by our executive chefs, featuring premium global ingredients and bold flavors." 
-              },
-              { 
-                icon: Sparkles, 
-                title: "Refined Atmosphere", 
-                desc: "A sophisticated ambiance designed for discerning guests who appreciate comfort, aesthetics, and high-end tech." 
-              }
-            ].map((feature, i) => (
-              <div key={i} className="premium-card p-12 text-center flex flex-col items-center group">
-                <div className="w-16 h-16 bg-mysteria-cream rounded-2xl flex items-center justify-center mb-8 text-mysteria-gold transition-colors group-hover:bg-mysteria-gold group-hover:text-white">
-                  <feature.icon size={32} />
+      {/* Featured Dishes */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">Featured Dishes</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {siteContent.homepage.featuredDishes.map((dish, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={dish.image}
+                    alt={dish.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    // Replace with actual dish images
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                      e.currentTarget.src = `https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop`;
+                    }}
+                  />
                 </div>
-                <h3 className="font-subheading text-2xl font-semibold text-mysteria-navy mb-4">{feature.title}</h3>
-                <p className="text-mysteria-textSecondary leading-relaxed">{feature.desc}</p>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">{dish.name}</h3>
+                  <p className="text-gray-600 mb-4">{dish.description}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-2xl font-bold text-orange-600">{dish.price}</span>
+                    <button className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                      Order Now
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Reservation CTA */}
-      <section className="py-24 bg-mysteria-charcoal text-white">
-        <div className="container mx-auto px-6 text-center max-w-4xl">
-          <h2 className="text-5xl font-display mb-6">Ready to Experience MYSTERIA?</h2>
-          <p className="text-xl text-[#cbd5e0] mb-12 font-light">Join us for an evening where entertainment meets epicurean delight.</p>
-          <Link to="/contact" className="gold-button inline-block">
-            Pre-Order Now
-          </Link>
+      {/* Quick Info */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="text-orange-600" size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Business Hours</h3>
+              <div className="space-y-2">
+                {siteContent.hours.map((item, index) => (
+                  <div key={index}>
+                    <p className="font-medium text-gray-900">{item.day}</p>
+                    <p className="text-gray-600">{item.time}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <MapPin className="text-orange-600" size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Location</h3>
+              <p className="text-gray-600 mb-4">
+                {siteContent.contact.address.street}<br />
+                {siteContent.contact.address.city}, {siteContent.contact.address.state}
+              </p>
+              <Link 
+                to="/location"
+                className="text-orange-600 hover:text-orange-700 font-medium"
+              >
+                Get Directions →
+              </Link>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Phone className="text-orange-600" size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Contact</h3>
+              <p className="text-gray-600 mb-4">
+                Call us for reservations<br />
+                or special events
+              </p>
+              <a 
+                href={`tel:${siteContent.contact.phone}`}
+                className="text-orange-600 hover:text-orange-700 font-medium"
+              >
+                {siteContent.contact.phone}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-orange-600">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-4 text-white">Ready to Experience Authentic Flavors?</h2>
+          <p className="text-xl mb-8 text-orange-100">Visit us today or make a reservation for your special occasion</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/contact"
+              className="bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg"
+            >
+              Make Reservation
+            </Link>
+            <a 
+              href={`tel:${siteContent.contact.phone}`}
+              className="bg-orange-700 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-800 transition-colors text-lg"
+            >
+              Call Now
+            </a>
+          </div>
         </div>
       </section>
     </div>
