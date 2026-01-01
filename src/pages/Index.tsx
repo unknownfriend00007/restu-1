@@ -61,7 +61,6 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-<dyad-write path="src/pages/Index.tsx" description="Updating Index page with cyberpunk theme and MYSTERIA branding (continued)">
       <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
