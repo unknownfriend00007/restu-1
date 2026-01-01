@@ -1,171 +1,315 @@
 "use client";
 
-import { Phone, Mail, MapPin, MessageCircle, Clock, Facebook, Instagram, Send } from 'lucide-react';
+import { useState } from 'react';
+import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';
-import ContactForm from '@/components/ContactForm';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+  const [errors, setErrors] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const validateForm = () => {
+    const newErrors = {
+      name: '',
+      phone: '',
+      email: '',
+      message: ''
+    };
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2 || formData.name.trim().length > 50) {
+      newErrors.name = 'Name must be between 2-50 characters';
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.name.trim())) {
+      newErrors.name = 'Name can only contain letters and spaces';
+    }
+
+    // Phone validation
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^[6-9]\d{9}$/.test(formData.phone.replace(/\s/g, ''))) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number';
+    }
+
+    // Email validation (optional)
+    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Order details are required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Please provide at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.values(newErrors).every(error => error === '');
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Simulate Telegram integration (in real app, this would call your Telegram API)
+      console.log('Order details:', formData);
+      
+      setSubmitStatus('success');
+      setFormData({ name: '', phone: '', email: '', message: '' });
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-orange-600 to-orange-700 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-xl mb-8 text-orange-100">
-            We'd love to hear from you. Get in touch with us for reservations, feedback, or any questions.
+    <div className="min-h-screen bg-[#f8f6f3]">
+      {/* Navigation space for fixed header */}
+      <div className="h-20"></div>
+
+      {/* Page Header */}
+      <section className="bg-gradient-to-b from-[#f8f6f3] to-[#ffffff] py-32 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl font-light font-['Cormorant_Garamond'] text-[#0f1419] mb-4">
+            Get in Touch
+          </h1>
+          <p className="text-lg text-[#4a5568] font-['Inter']">
+            Pre-order your meal or send us a message
           </p>
         </div>
       </section>
 
-      {/* Contact Info Cards */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="text-orange-600" size={32} />
+      {/* Form Container */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-[#ffffff] p-12 rounded-2xl shadow-[0_4px_24px_rgba(15,20,25,0.12)]">
+            <h2 className="text-3xl font-light font-['Cormorant_Garamond'] text-[#1a1f2e] mb-8">
+              Place Your Order
+            </h2>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name Field */}
+              <div>
+                <label htmlFor="name" className="block text-sm font-semibold font-['Inter'] text-[#4a5568] mb-2">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full h-13 bg-[#f8f6f3] border-2 border-transparent rounded-xl px-4 text-base text-[#1a1f2e] font-['Inter'] focus:bg-[#ffffff] focus:border-[#c9a961] transition-all duration-300"
+                  placeholder="John Doe"
+                />
+                {errors.name && (
+                  <p className="text-sm text-[#dc2626] font-['Inter'] mt-1 flex items-center">
+                    <span className="mr-1">⚠️</span>
+                    {errors.name}
+                  </p>
+                )}
               </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Phone</h3>
-              <a 
-                href={`tel:${siteContent.contact.phone}`}
-                className="text-gray-600 hover:text-orange-600 text-lg font-medium"
+
+              {/* Phone Field */}
+              <div>
+                <label htmlFor="phone" className="block text-sm font-semibold font-['Inter'] text-[#4a5568] mb-2">
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full h-13 bg-[#f8f6f3] border-2 border-transparent rounded-xl px-4 text-base text-[#1a1f2e] font-['Inter'] focus:bg-[#ffffff] focus:border-[#c9a961] transition-all duration-300"
+                  placeholder="9876543210"
+                />
+                {errors.phone && (
+                  <p className="text-sm text-[#dc2626] font-['Inter'] mt-1 flex items-center">
+                    <span className="mr-1">⚠️</span>
+                    {errors.phone}
+                  </p>
+                )}
+              </div>
+
+              {/* Email Field */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-semibold font-['Inter'] text-[#4a5568] mb-2">
+                  Email (Optional)
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full h-13 bg-[#f8f6f3] border-2 border-transparent rounded-xl px-4 text-base text-[#1a1f2e] font-['Inter'] focus:bg-[#ffffff] focus:border-[#c9a961] transition-all duration-300"
+                  placeholder="john@example.com"
+                />
+                {errors.email && (
+                  <p className="text-sm text-[#dc2626] font-['Inter'] mt-1 flex items-center">
+                    <span className="mr-1">⚠️</span>
+                    {errors.email}
+                  </p>
+                )}
+              </div>
+
+              {/* Message Field */}
+              <div>
+                <label htmlFor="message" className="block text-sm font-semibold font-['Inter'] text-[#4a5568] mb-2">
+                  Order Details / Message *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={5}
+                  className="w-full bg-[#f8f6f3] border-2 border-transparent rounded-xl px-4 py-4 text-base text-[#1a1f2e] font-['Inter'] focus:bg-[#ffffff] focus:border-[#c9a961] transition-all duration-300 resize-none"
+                  placeholder="Tell us what you'd like to order..."
+                ></textarea>
+                {errors.message && (
+                  <p className="text-sm text-[#dc2626] font-['Inter'] mt-1 flex items-center">
+                    <span className="mr-1">⚠️</span>
+                    {errors.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-14 bg-gradient-to-r from-[#c9a961] to-[#b89751] text-[#0f1419] rounded-xl font-semibold font-['Inter'] transition-all duration-300 hover:transform hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,169,97,0.3)] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center"
               >
+                {isSubmitting ? (
+                  <div className="animate-spin w-5 h-5 border-2 border-[#0f1419] border-t-transparent rounded-full"></div>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5 mr-2" />
+                    Place Order
+                  </>
+                )}
+              </button>
+
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="bg-[#059669]/10 border-2 border-[#059669] rounded-xl p-4 flex items-center">
+                  <div className="w-6 h-6 bg-[#059669] rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="text-[#059669] font-['Inter']">
+                    Order received! We'll contact you shortly.
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="bg-[#dc2626]/10 border-2 border-[#dc2626] rounded-xl p-4">
+                  <p className="text-[#dc2626] font-['Inter']">
+                    Failed to send. Please call us at {siteContent.contact.phone}
+                  </p>
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Info */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {/* Address */}
+          <div className="text-center">
+            <div className="w-16 h-16 bg-[#f8f6f3] rounded-full flex items-center justify-center mx-auto mb-4">
+              <MapPin className="text-[#c9a961] w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-semibold font-['Josefin_Sans'] text-[#1a1f2e] mb-4">
+              Address
+            </h3>
+            <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed">
+              {siteContent.contact.address.street}<br />
+              {siteContent.contact.address.city}, {siteContent.contact.address.state} {siteContent.contact.address.zip}
+            </p>
+            <a
+              href={siteContent.contact.address.mapLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-[#c9a961] font-medium font-['Inter'] hover:text-[#b89751] transition-colors"
+            >
+              Get Directions →
+            </a>
+          </div>
+
+          {/* Contact */}
+          <div className="text-center">
+            <div className="w-16 h-16 bg-[#f8f6f3] rounded-full flex items-center justify-center mx-auto mb-4">
+              <Phone className="text-[#c9a961] w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-semibold font-['Josefin_Sans'] text-[#1a1f2e] mb-4">
+              Contact
+            </h3>
+            <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed mb-2">
+              <a href={`tel:${siteContent.contact.phone}`} className="text-[#c9a961] hover:text-[#b89751] transition-colors">
                 {siteContent.contact.phone}
               </a>
-              <p className="text-sm text-gray-500 mt-2">Call for reservations</p>
-            </div>
-
-            <div className="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="text-green-600" size={32} />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">WhatsApp</h3>
-              <a 
-                href={`https://wa.me/${siteContent.contact.whatsapp.replace(/[^\d]/g, '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-green-600 text-lg font-medium"
-              >
-                {siteContent.contact.whatsapp}
-              </a>
-              <p className="text-sm text-gray-500 mt-2">Chat with us</p>
-            </div>
-
-            <div className="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="text-blue-600" size={32} />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Email</h3>
-              <a 
-                href={`mailto:${siteContent.contact.email}`}
-                className="text-gray-600 hover:text-blue-600 text-lg font-medium"
-              >
+            </p>
+            <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed">
+              <a href={`mailto:${siteContent.contact.email}`} className="text-[#c9a961] hover:text-[#b89751] transition-colors">
                 {siteContent.contact.email}
               </a>
-              <p className="text-sm text-gray-500 mt-2">Send us a message</p>
-            </div>
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Contact Form & Info */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Send us a Message</h2>
-              <ContactForm />
+          {/* Hours */}
+          <div className="text-center">
+            <div className="w-16 h-16 bg-[#f8f6f3] rounded-full flex items-center justify-center mx-auto mb-4">
+              <Clock className="text-[#c9a961] w-8 h-8" />
             </div>
-
-            {/* Additional Info */}
-            <div>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Visit Us</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <MapPin className="text-orange-600 mt-1" size={24} />
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2 text-gray-900">Address</h3>
-                    <p className="text-gray-600">
-                      {siteContent.contact.address.street}<br />
-                      {siteContent.contact.address.city}, {siteContent.contact.address.state} {siteContent.contact.address.zip}
-                    </p>
-                  </div>
+            <h3 className="text-xl font-semibold font-['Josefin_Sans'] text-[#1a1f2e] mb-4">
+              Opening Hours
+            </h3>
+            <div className="space-y-2">
+              {siteContent.hours.map((item, index) => (
+                <div key={index} className="text-base text-[#4a5568] font-['Inter']">
+                  <span className="font-medium">{item.day}</span>
+                  <span className="ml-2">{item.time}</span>
                 </div>
-
-                <div className="flex items-start space-x-4">
-                  <Clock className="text-orange-600 mt-1" size={24} />
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2 text-gray-900">Business Hours</h3>
-                    <div className="space-y-1">
-                      {siteContent.hours.map((item, index) => (
-                        <div key={index}>
-                          <p className="font-medium text-gray-900">{item.day}</p>
-                          <p className="text-gray-600">{item.time}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold mb-4 text-gray-900">Follow Us</h3>
-                  <div className="flex space-x-4">
-                    <a 
-                      href={siteContent.social.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity"
-                    >
-                      <Instagram size={24} className="text-white" />
-                    </a>
-                    <a 
-                      href={siteContent.social.facebook}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
-                    >
-                      <Facebook size={24} className="text-white" />
-                    </a>
-                    <a 
-                      href={siteContent.social.telegram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
-                    >
-                      <Send size={24} className="text-white" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Frequently Asked Questions</h2>
-          <div className="max-w-3xl mx-auto space-y-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">Do I need a reservation?</h3>
-              <p className="text-gray-600">
-                While walk-ins are welcome, we highly recommend making a reservation, especially for weekend dining and large groups.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">Do you offer catering services?</h3>
-              <p className="text-gray-600">
-                Yes! We offer catering for events of all sizes. Please contact us at least 48 hours in advance to discuss your requirements.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">Do you have vegetarian options?</h3>
-              <p className="text-gray-600">
-                Absolutely! We have an extensive vegetarian menu with delicious options that cater to various dietary preferences.
-              </p>
+              ))}
             </div>
           </div>
         </div>

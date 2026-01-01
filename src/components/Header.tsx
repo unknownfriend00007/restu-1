@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, MapPin } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';
 
 const Header = () => {
@@ -12,23 +12,22 @@ const Header = () => {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Menu', href: '/menu' },
-    { name: 'Location', href: '/location' },
-    { name: 'Contact', href: '/contact' }
+    { name: 'Contact', href: '/contact' },
+    { name: 'Location', href: '/location' }
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm h-20 shadow-sm transition-all duration-300 hover:shadow-md">
+      <div className="container mx-auto px-4 h-full">
+        <div className="flex items-center justify-between h-full">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">R</span>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">{siteContent.restaurant.name}</h1>
-              <p className="text-xs text-gray-600 hidden sm:block">{siteContent.restaurant.tagline}</p>
-            </div>
+          <Link to="/" className="flex flex-col items-start space-y-1">
+            <h1 className="text-2xl font-light tracking-wide text-[#0f1419] font-['Cormorant_Garamond']">
+              {siteContent.restaurant.name}
+            </h1>
+            <p className="text-xs text-[#718096] font-['Inter'] tracking-[2px] uppercase">
+              {siteContent.restaurant.tagline}
+            </p>
           </Link>
 
           {/* Desktop Navigation */}
@@ -37,37 +36,24 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-orange-600 ${
-                  location.pathname === item.href ? 'text-orange-600' : 'text-gray-700'
+                className={`text-sm font-medium transition-colors hover:text-[#c9a961] ${
+                  location.pathname === item.href 
+                    ? 'text-[#c9a961] relative' 
+                    : 'text-[#4a5568]'
                 }`}
               >
                 {item.name}
+                {location.pathname === item.href && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#c9a961]"></span>
+                )}
               </Link>
             ))}
           </nav>
 
-          {/* Quick Actions */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <a 
-              href={`tel:${siteContent.contact.phone}`}
-              className="flex items-center space-x-1 text-sm text-gray-600 hover:text-orange-600"
-            >
-              <Phone size={16} />
-              <span>{siteContent.contact.phone}</span>
-            </a>
-            <Link 
-              to="/location"
-              className="flex items-center space-x-1 text-sm text-gray-600 hover:text-orange-600"
-            >
-              <MapPin size={16} />
-              <span>Location</span>
-            </Link>
-          </div>
-
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100"
+            className="md:hidden p-2 rounded-md text-[#4a5568] hover:text-[#c9a961] hover:bg-gray-100 transition-colors"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -75,35 +61,22 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200">
+          <div className="md:hidden border-t border-gray-200 mt-4">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors hover:text-orange-600 hover:bg-gray-50 ${
-                    location.pathname === item.href ? 'text-orange-600 bg-orange-50' : 'text-gray-700'
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors hover:text-[#c9a961] hover:bg-gray-50 ${
+                    location.pathname === item.href 
+                      ? 'text-[#c9a961] bg-orange-50' 
+                      : 'text-[#4a5568]'
                   }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-4 pb-2 border-t border-gray-200">
-                <a 
-                  href={`tel:${siteContent.contact.phone}`}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-orange-600"
-                >
-                  📞 {siteContent.contact.phone}
-                </a>
-                <Link 
-                  to="/location"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-orange-600"
-                >
-                  📍 Location
-                </Link>
-              </div>
             </div>
           </div>
         )}
