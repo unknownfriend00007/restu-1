@@ -33,7 +33,12 @@ export const siteContent = {
   },
 
   menu: {
-    categories: ["All", "Starters", "Main Course", "Beverages", "Desserts", "Gaming Snacks"]
+    categories: ["All", "Starters", "Main Course", "Beverages", "Desserts", "Gaming Snacks"],
+    telegramChannelUsername: "mysteria"
+  },
+
+  forms: {
+    contactFormAction: "https://formspree.io/f/your-form-id"
   },
 
   homepage: {

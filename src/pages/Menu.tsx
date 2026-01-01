@@ -86,8 +86,8 @@ const Menu = () => {
                 onClick={() => handleCategoryClick(category)}
                 className={`px-6 py-3 rounded-full transition-all duration-300 ${
                   activeCategory === category
-                    ? 'bg-[#c9a961] text-[#0f1419] font-medium font-['Inter']'
-                    : 'bg-[#f8f6f3] text-[#4a5568] font-medium font-['Inter'] hover:bg-[#ffffff] hover:border-[#e2e8f0] border-2 border-transparent'
+                    ? 'bg-[#c9a961] text-[#0f1419] font-medium font-["Inter"]'
+                    : 'bg-[#f8f6f3] text-[#4a5568] font-medium font-["Inter"] hover:bg-[#ffffff] hover:border-[#e2e8f0] border-2 border-transparent'
                 }`}
               >
                 {category}
