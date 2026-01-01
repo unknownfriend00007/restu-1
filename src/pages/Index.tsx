@@ -15,7 +15,7 @@ const Index = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[#0f1419] to-[#1a1f2e] opacity-90"></div>
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cdefs%3E%3Cpattern id=\"grain\" width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\"%3E%3Ccircle cx=\"50\" cy=\"50\" r=\"1\" fill=\"white\" opacity=\"0.03\"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width=\"100\" height=\"100\" fill=\"url(%23grain)\"/%3E%3C/svg%3E')] opacity-30"></div>
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,<svg width=\"100\" height=\"100\" xmlns=\"http://www.w3.org/2000/svg\"><defs><pattern id=\"grain\" width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\"><circle cx=\"50\" cy=\"50\" r=\"1\" fill=\"white\" opacity=\"0.03\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(#grain)\"/></svg>')] opacity-30"></div>
         </div>
         
         <div className="relative z-10 text-center text-[#f8f6f3] px-4 max-w-4xl mx-auto">

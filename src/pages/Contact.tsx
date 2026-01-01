@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { siteContent } from '@/config/siteContent';
 
 const Contact = () => {
@@ -218,7 +217,9 @@ const Contact = () => {
                   <div className="animate-spin w-5 h-5 border-2 border-[#0f1419] border-t-transparent rounded-full"></div>
                 ) : (
                   <>
-                    <Send className="w-5 h-5 mr-2" />
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
                     Place Order
                   </>
                 )}
@@ -256,12 +257,15 @@ const Contact = () => {
           {/* Address */}
           <div className="text-center">
             <div className="w-16 h-16 bg-[#f8f6f3] rounded-full flex items-center justify-center mx-auto mb-4">
-              <MapPin className="text-[#c9a961] w-8 h-8" />
+              <svg className="text-[#c9a961] w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657a8 8 0 11-11.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.093 11.182l4.257 4.257a1 1 0 01-1.414 1.414L12.686 13.09a1 1 0 00-1.414 0L7.059 16.894a1 1 0 11-1.414-1.414l4.26-4.26a8 8 0 1111.313-5.313z" />
+              </svg>
             </div>
             <h3 className="text-xl font-semibold font-['Josefin_Sans'] text-[#1a1f2e] mb-4">
               Address
             </h3>
-            <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed">
+            <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed mb-6">
               {siteContent.contact.address.street}<br />
               {siteContent.contact.address.city}, {siteContent.contact.address.state} {siteContent.contact.address.zip}
             </p>
@@ -269,36 +273,43 @@ const Contact = () => {
               href={siteContent.contact.address.mapLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 text-[#c9a961] font-medium font-['Inter'] hover:text-[#b89751] transition-colors"
+              className="inline-block bg-[#c9a961] text-[#0f1419] px-6 py-3 rounded-lg font-medium font-['Inter'] hover:bg-[#b89751] transition-colors"
             >
-              Get Directions →
+              Get Directions
             </a>
           </div>
 
           {/* Contact */}
           <div className="text-center">
             <div className="w-16 h-16 bg-[#f8f6f3] rounded-full flex items-center justify-center mx-auto mb-4">
-              <Phone className="text-[#c9a961] w-8 h-8" />
+              <svg className="text-[#c9a961] w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.9.218L9 2.22h3.28a1 1 0 01.9.218l1.278 1.278a1 1 0 01.218.9V18a2 2 0 01-2 2H6a2 2 0 01-2-2V5z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 3v4m0 0v4m0 0v4m0-4h-6m6 0h-6" />
+              </svg>
             </div>
             <h3 className="text-xl font-semibold font-['Josefin_Sans'] text-[#1a1f2e] mb-4">
               Contact
             </h3>
-            <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed mb-2">
-              <a href={`tel:${siteContent.contact.phone}`} className="text-[#c9a961] hover:text-[#b89751] transition-colors">
-                {siteContent.contact.phone}
-              </a>
-            </p>
-            <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed">
-              <a href={`mailto:${siteContent.contact.email}`} className="text-[#c9a961] hover:text-[#b89751] transition-colors">
-                {siteContent.contact.email}
-              </a>
-            </p>
+            <div className="space-y-3">
+              <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed">
+                <a href={`tel:${siteContent.contact.phone}`} className="text-[#c9a961] hover:text-[#b89751] transition-colors font-medium">
+                  {siteContent.contact.phone}
+                </a>
+              </p>
+              <p className="text-base text-[#4a5568] font-['Inter'] leading-relaxed">
+                <a href={`mailto:${siteContent.contact.email}`} className="text-[#c9a961] hover:text-[#b89751] transition-colors font-medium">
+                  {siteContent.contact.email}
+                </a>
+              </p>
+            </div>
           </div>
 
           {/* Hours */}
           <div className="text-center">
             <div className="w-16 h-16 bg-[#f8f6f3] rounded-full flex items-center justify-center mx-auto mb-4">
-              <Clock className="text-[#c9a961] w-8 h-8" />
+              <svg className="text-[#c9a961] w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
             <h3 className="text-xl font-semibold font-['Josefin_Sans'] text-[#1a1f2e] mb-4">
               Opening Hours
