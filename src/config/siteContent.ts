@@ -43,6 +43,7 @@ export const siteContent = {
 
   homepage: {
     heroImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop",
+    subtitle: "Excellence in every detail", // Added subtitle here to resolve TS2339
     features: [
       {
         title: "Premium Gaming",
